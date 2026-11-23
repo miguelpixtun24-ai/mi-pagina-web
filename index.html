@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- 
+    ¿QUÉ ES EL <head>?
+    Es como la ficha técnica de la página. Aquí no ponemos cosas visibles, 
+    sino información para el navegador: el título, la codificación de caracteres (acentos y ñ) 
+    y la conexión con fuentes de texto y nuestra hoja de estilos (CSS).
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Estudio de Dibujo</title>
+
+  <!-- Tipografía moderna traída de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Enlace al archivo de diseño (CSS) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 
+    ¿QUÉ ES EL <body>?
+    Es el cuerpo de la página: todo lo que el usuario va a ver en pantalla.
+  -->
+
+  <!-- Encabezado con título e instrucciones -->
+  <header class="header">
+    <div class="logo-badge">🎨 Dibujo Digital</div>
+    <h1>Estudio de Dibujo</h1>
+    <p>Un espacio minimalista para crear bocetos, ilustraciones e ideas con trazos suaves.</p>
+  </header>
+
+  <!-- Contenedor principal de la aplicación -->
+  <main class="app-container">
+    
+    <!-- Barra de Herramientas (Toolbar): donde están los controles -->
+    <div class="toolbar">
+      
+      <!-- Control 1: Selector de color -->
+      <div class="tool-item">
+        <label for="colorPicker">Color</label>
+        <div class="color-wrapper">
+          <input type="color" id="colorPicker" value="#2d3748" title="Elige un color">
+        </div>
+      </div>
+
+      <!-- Control 2: Grosor del pincel (Deslizador / Slider) -->
+      <div class="tool-item brush-control">
+        <div class="label-row">
+          <label for="brushSize">Grosor:</label>
+          <span id="brushSizeDisplay">6 px</span>
+        </div>
+        <div class="slider-row">
+          <!-- Este 'input type=range' es la barra deslizable que pediste -->
+          <input type="range" id="brushSize" min="1" max="50" value="6" step="1">
+          <!-- Vista previa visual del tamaño del punto -->
+          <div class="preview-dot-container">
+            <div id="brushPreviewDot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control 3: Botones de acción -->
+      <div class="tool-actions">
+        <!-- Botón para alternar modo borrador -->
+        <button id="eraserBtn" class="btn btn-tool" title="Alternar goma de borrar">
+          <span class="icon">🧽</span> Borrador
+        </button>
+
+        <!-- Botón para limpiar todo el lienzo -->
+        <button id="clearBtn" class="btn btn-tool btn-danger" title="Borrar todo">
+          <span class="icon">🗑️</span> Limpiar
+        </button>
+
+        <!-- Botón para descargar el dibujo -->
+        <button id="saveBtn" class="btn btn-primary" title="Guardar como imagen PNG">
+          <span class="icon">📥</span> Guardar Dibujo
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Área del lienzo (Canvas) -->
+    <div class="canvas-card">
+      <!-- 
+        ¿QUÉ ES <canvas>?
+        Es una etiqueta especial de HTML5 que actúa como una hoja de papel digital en blanco.
+        Por sí sola no dibuja nada; con JavaScript 'pintaremos' sobre ella pixel a pixel.
+      -->
+      <canvas id="drawingCanvas" width="850" height="520"></canvas>
+    </div>
+
+  </main>
+
+  <!-- Pie de página con un mensaje amigable -->
+  <footer class="footer">
+    <p>💡 Tip: Mantén presionado el ratón o usa tu dedo en pantallas táctiles para dibujar.</p>
+  </footer>
+
+  <!-- 
+    Enlace al archivo de lógica (JavaScript): 
+    Se suele colocar al final para que toda la página cargue primero antes del código de interacción.
+  -->
+  <script src="script.js"></script>
+</body>
+</html>

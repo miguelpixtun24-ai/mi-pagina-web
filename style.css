@@ -1,0 +1,332 @@
+/* ==========================================================
+   HOJA DE ESTILOS (CSS) - ESTUDIO DE DIBUJO
+   
+   ¿Para qué sirve este archivo?
+   Aquí definimos la apariencia visual: colores, tamaños de letra,
+   sombras suaves, bordes redondeados y la posición de cada elemento.
+   ========================================================== */
+
+/* 1. RESET BÁSICO Y VARIABLES DE COLOR
+   Nos asegura que todos los navegadores partan del mismo punto */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Hace que el tamaño de los elementos incluya el padding y borde */
+}
+
+:root {
+  /* Paleta minimalista y moderna */
+  --bg-color: #f8fafc;          /* Fondo suave general */
+  --card-bg: #ffffff;           /* Fondo blanco para tarjetas y barras */
+  --text-main: #0f172a;         /* Texto oscuro principal */
+  --text-muted: #64748b;        /* Texto secundario gris */
+  --border-color: #e2e8f0;      /* Bordes sutiles y elegantes */
+  --primary-color: #2563eb;     /* Azul moderno para botones principales */
+  --primary-hover: #1d4ed8;     /* Azul un poco más oscuro al pasar el ratón */
+  --danger-color: #ef4444;      /* Rojo suave para el botón de borrar */
+  --danger-hover: #dc2626;
+  --radius-sm: 8px;             /* Curvatura de bordes pequeños */
+  --radius-md: 14px;            /* Curvatura media */
+  --radius-lg: 20px;            /* Curvatura grande */
+  --shadow-soft: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+}
+
+/* 2. ESTILO DEL CUERPO (BODY) */
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+/* 3. ENCABEZADO */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo-badge {
+  display: inline-block;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 500px;
+}
+
+/* 4. CONTENEDOR PRINCIPAL */
+.app-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 5. BARRA DE HERRAMIENTAS (TOOLBAR) */
+.toolbar {
+  background: var(--card-bg);
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.tool-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tool-item label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Selector de color redondeado */
+.color-wrapper {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--border-color);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.color-wrapper:hover {
+  transform: scale(1.08);
+}
+
+#colorPicker {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+/* Control del deslizador de grosor (Brush slider) */
+.brush-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.label-row span {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Estilo personalizado del input range */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 130px;
+  height: 6px;
+  background: #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.1s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Vista previa del tamaño del pincel */
+.preview-dot-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+#brushPreviewDot {
+  width: 6px;
+  height: 6px;
+  background-color: #2d3748;
+  border-radius: 50%;
+  transition: width 0.1s ease, height 0.1s ease, background-color 0.2s ease;
+}
+
+/* Botones de acción */
+.tool-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-tool {
+  background: #f1f5f9;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+.btn-tool:hover {
+  background: #e2e8f0;
+}
+
+/* Estado activo del botón borrador */
+.btn-tool.active {
+  background: #334155;
+  color: #ffffff;
+  border-color: #334155;
+}
+
+.btn-danger {
+  color: var(--danger-color);
+}
+
+.btn-danger:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* 6. ÁREA DEL LIENZO (CANVAS) */
+.canvas-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#drawingCanvas {
+  background-color: #ffffff;
+  display: block;
+  cursor: crosshair; /* Cursor en forma de cruz para dibujar con precisión */
+  touch-action: none; /* Evita que el navegador haga scroll en móviles mientras dibujas */
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+}
+
+/* 7. PIE DE PÁGINA */
+.footer {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* 8. ADAPTACIÓN PARA MÓVILES (Responsive Design) */
+@media (max-width: 700px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tool-item, .brush-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  input[type="range"] {
+    flex-grow: 1;
+  }
+
+  .tool-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
